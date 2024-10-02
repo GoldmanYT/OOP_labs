@@ -1,16 +1,16 @@
 #include <iostream>
+#include <string>
+
 using namespace std;
 
-const double pi = 3.1415926535;
-const int precision = 5;
+const double pi = M_PI;
+const int precision = 7;
 
-double arccos(double x, int epsilon);
-double format(double x, int precision);
+string format(double x);
 
 int main()
 {
-    double x1, x2, dx;
-    int epsilon;
+    double x1, x2, dx, eps;
 
     cout << "Enter x1: ";
     cin >> x1;
@@ -18,45 +18,33 @@ int main()
     cin >> x2;
     cout << "Enter dx: ";
     cin >> dx;
-    cout << "Enter epsilon: ";
-    cin >> epsilon;
+    cout << "Enter eps: ";
+    cin >> eps;
 
-    cout << "x\tarccos\tepsilon\n";
+    cout << "x\tarccos\tcount\tacos\n";
     for (double x = x1; x <= x2; x += dx)
     {
-        cout << format(x, precision) << "\t" << 
-                format(arccos(x, epsilon), precision) << 
-                "\t" << epsilon << "\n";
+        double result = pi / 2 - x;
+        double prev = pi / 2;
+        double pow_x = x * x * x;
+        double numerator = 1;
+        double denomerator = 2;
+        int n;
+        for (n = 1; abs(result - prev) > 10 * eps; n++)
+        {
+            prev = result;
+            result -= (numerator * pow_x) / (denomerator * (2 * n + 1));
+            pow_x *= x * x;
+            numerator *= 2 * n + 1;
+            denomerator *= 2 * (n + 1);
+        }
+        cout << format(x) << "\t" << format(result) << "\t" << n << "\t" << format(acos(x)) << "\n";
     }
     return 0;
 }
 
-double arccos(double x, int epsilon)
+string format(double x)
 {
-    double result = pi / 2 - x;
-    double pow_x = x * x * x;
-    double numerator = 1;
-    double denomerator = 2;
-    for (int n = 1; n <= epsilon; n++)
-    {
-        result -= (numerator * pow_x) / (denomerator * (2 * n + 1));
-        pow_x *= x * x;
-        numerator *= 2 * n + 1;
-        denomerator *= 2 * (n + 1);
-    }
-    return result;
-}
-
-double format(double x, int precision)
-{
-    for (int i = 0; i < precision; i++)
-    {
-        x *= 10;
-    }
-    x = int(x);
-    for (int i = 0; i < precision; i++)
-    {
-        x /= 10;
-    }
-    return x;
+    string s = to_string(x);
+    return s.substr(0, precision);
 }
