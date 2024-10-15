@@ -1,5 +1,4 @@
 #include <iostream>
-#include <fstream>
 
 using namespace std;
 
@@ -27,15 +26,17 @@ int main()
 
 void part_a()
 {
-    ifstream file("lab3_input_part_a.txt");
     int n;
-    file >> n;
     double a[max_size];
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> a[i];
+    }
     cout << "part A:\n";
     cout << "array: ";
     for (int i = 0; i < n; i++)
     {
-        file >> a[i];
         cout << a[i] << " ";
     }
     cout << "\n";
@@ -53,22 +54,26 @@ void part_a()
 
 void part_b()
 {
-    ifstream file("lab3_input_part_b.txt");
     int n;
-    file >> n;
     int a[max_size][max_size];
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            cin >> a[i][j];
+        }
+    }
     cout << "part B:\n";
     cout << "matrix:\n";
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < n; j++)
         {
-            file >> a[i][j];
             cout << a[i][j] << " ";
         }
         cout << "\n";
     }
-    file.close();
     cout << "\n";
     
     cout << "count_no_zero_rows: " << count_no_zero_rows(a, n) << "\n";
