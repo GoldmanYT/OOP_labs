@@ -182,7 +182,7 @@ int count_no_zero_rows(int a[][max_size], int n)
 
 int max_repeated(int a[][max_size], int n)
 {
-    int result = -0x7f'00'00'00;
+    int result = -0x7f'ff'ff'ff - 1;
 
     for (int i = 0; i < n; i++)
     {
