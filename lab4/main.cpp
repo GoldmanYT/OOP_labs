@@ -182,6 +182,16 @@ int main()
     ptr_void = ptr_double;
     cout << "double value: " << *(double *)ptr_double << endl << endl;
     
+    ptr_void = ptr_vanya;
+    cout << "name: " << ((Person *)ptr_void)->name;
+    cout << "\tage: " << ((Person *)ptr_vanya)->age;
+    cout << "\tsex: " << ((Person *)ptr_vanya)->sex << endl;
+    
+    ptr_void = ptr_dasha;
+    cout << "name: " << ((Person *)ptr_void)->name;
+    cout << "\tage: " << ((Person *)ptr_vanya)->age;
+    cout << "\tsex: " << ((Person *)ptr_vanya)->sex << endl;
+    
     return 0;
 }
 
