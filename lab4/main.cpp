@@ -17,6 +17,9 @@ int count_no_zero_rows(int **a, int n);
 int max_repeated(int **a, int n);
 bool repeated(int x, int **a, int n);
 
+typedef double (*PF)(double*, int);
+void do_task8(PF, double*, int);
+
 int main()
 {
     // Задание 1
@@ -145,9 +148,40 @@ int main()
     }
 
     // Задание 8
+    {
+        const int n = 5;
+        double a[]{-4.4, 1.1, -2.2, 3.3, 5.5};
+        PF ptr_fun = product_min_max;
+        cout << "array:\t";
+        print(a, n);
+        cout << endl;
+        cout << "product between min & max:\t";
+        do_task8(ptr_fun, a, n);
+		cout << endl << endl;
+    }
 
     // Задание 9
-
+    void *ptr_void;
+    cout << "int value: " << *ptr_int << endl;
+    cout << "bool value: " << *ptr_bool << endl;
+    cout << "char value: " << *ptr_char << endl;
+    cout << "wchar_t value: " << *ptr_wchar << endl;
+    cout << "float value: " << *ptr_float << endl;
+    cout << "double value: " << *ptr_double << endl << endl;
+    
+    ptr_void = ptr_int;
+    cout << "int value: " << *(int *)ptr_void << endl;
+    ptr_void = ptr_bool;
+    cout << "bool value: " << *(bool *)ptr_bool << endl;
+    ptr_void = ptr_char;
+    cout << "char value: " << *(char *)ptr_char << endl;
+    ptr_void = ptr_wchar;
+    cout << "wchar_t value: " << *(wchar_t *)ptr_wchar << endl;
+    ptr_void = ptr_float;
+    cout << "float value: " << *(float *)ptr_float << endl;
+    ptr_void = ptr_double;
+    cout << "double value: " << *(double *)ptr_double << endl << endl;
+    
     return 0;
 }
 
@@ -308,4 +342,9 @@ bool repeated(int x, int **a, int n)
         }
     }
     return false;
+}
+
+void do_task8(PF ptr_fun, double *a, int n)
+{
+	cout << ptr_fun(a, n);
 }
